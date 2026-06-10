@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date(Itinerary::STARTS_AT)->nullable();
             $table->date(Itinerary::ENDS_AT)->nullable();
             $table->string(Itinerary::STATUS)->default(ItineraryStatus::Draft->value);
-            $table->json(Itinerary::METADATA)->nullable();
             $table->timestamps();
 
             $table->index([Itinerary::AGENCY_ID, Itinerary::STATUS]);

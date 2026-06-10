@@ -29,8 +29,6 @@ class Itinerary extends Model
 
     public const STATUS = 'status';
 
-    public const METADATA = 'metadata';
-
     public const FILLABLE = [
         self::AGENCY_ID,
         self::TRAVELLER_ID,
@@ -39,7 +37,6 @@ class Itinerary extends Model
         self::STARTS_AT,
         self::ENDS_AT,
         self::STATUS,
-        self::METADATA,
     ];
 
     protected $table = self::TABLE;
@@ -62,7 +59,6 @@ class Itinerary extends Model
             self::STARTS_AT => 'date',
             self::ENDS_AT => 'date',
             self::STATUS => ItineraryStatus::class,
-            self::METADATA => 'array',
         ];
     }
 }

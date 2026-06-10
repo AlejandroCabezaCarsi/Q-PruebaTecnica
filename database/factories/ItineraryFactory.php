@@ -33,9 +33,6 @@ class ItineraryFactory extends Factory
             Itinerary::STARTS_AT => $startsAt,
             Itinerary::ENDS_AT => $endsAt,
             Itinerary::STATUS => fake()->randomElement(ItineraryStatus::cases())->value,
-            Itinerary::METADATA => [
-                'booking_reference' => strtoupper(fake()->bothify('???-#####')),
-            ],
         ];
     }
 
