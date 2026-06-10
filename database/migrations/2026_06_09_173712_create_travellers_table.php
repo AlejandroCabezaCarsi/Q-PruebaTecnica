@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string(Traveller::PHONE_NUMBER)->nullable();
             $table->timestamps();
 
+            $table->unique(['id', Traveller::AGENCY_ID]);
             $table->unique([Traveller::AGENCY_ID, Traveller::EMAIL]);
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create(Itinerary::TABLE, function (Blueprint $table) {
             $table->id();
             $table->foreignId(Itinerary::AGENCY_ID)->constrained(Agency::TABLE)->cascadeOnDelete();
-            $table->foreignId(Itinerary::TRAVELLER_ID)->constrained(Traveller::TABLE)->cascadeOnDelete();
+            $table->unsignedBigInteger(Itinerary::TRAVELLER_ID);
             $table->string(Itinerary::TITLE);
             $table->string(Itinerary::DESTINATION);
             $table->date(Itinerary::STARTS_AT)->nullable();
@@ -28,7 +28,13 @@ return new class extends Migration
 
             $table->index([Itinerary::AGENCY_ID, Itinerary::STATUS]);
             $table->index([Itinerary::AGENCY_ID, Itinerary::STARTS_AT]);
+            $table->index([Itinerary::TRAVELLER_ID, Itinerary::AGENCY_ID]);
             $table->index([Itinerary::TRAVELLER_ID, Itinerary::STARTS_AT]);
+            $table
+                ->foreign([Itinerary::TRAVELLER_ID, Itinerary::AGENCY_ID])
+                ->references(['id', Traveller::AGENCY_ID])
+                ->on(Traveller::TABLE)
+                ->cascadeOnDelete();
         });
     }
 
