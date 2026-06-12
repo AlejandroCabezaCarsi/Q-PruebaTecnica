@@ -10,6 +10,40 @@ Laravel API for a multi-tenant travel domain. Agencies authenticate with a beare
 
 This project was built with Laravel 13.
 
+## Quick Start
+
+From a fresh clone:
+
+```bash
+git clone <repository-url>
+cd Q-PruebaTecnica
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+Windows PowerShell equivalent:
+
+```powershell
+git clone <repository-url>
+Set-Location Q-PruebaTecnica
+composer install
+Copy-Item .env.example .env
+php artisan key:generate
+New-Item database/database.sqlite -ItemType File -Force
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+The API will be available at:
+
+```txt
+http://127.0.0.1:8000
+```
+
 ## Setup
 
 Install dependencies:
@@ -35,6 +69,18 @@ When `DB_DATABASE` is not set, Laravel uses:
 
 ```txt
 database/database.sqlite
+```
+
+Create the SQLite file before running migrations if it does not already exist:
+
+```bash
+touch database/database.sqlite
+```
+
+On Windows PowerShell:
+
+```powershell
+New-Item database/database.sqlite -ItemType File -Force
 ```
 
 Prepare the database with demo data:
@@ -65,6 +111,14 @@ Use this token for the main demo agency:
 qynvo-demo-token
 ```
 
+Use this token for the second demo agency:
+
+```txt
+other-agency-token
+```
+
+Requests made with one agency token cannot see or update itineraries owned by the other agency.
+
 Example request:
 
 ```bash
@@ -90,6 +144,21 @@ Unauthenticated requests return:
 ```
 
 ## Endpoints
+
+For Postman or another API client, these variables are useful:
+
+```txt
+base_url = http://127.0.0.1:8000/api/v1
+agency_token = qynvo-demo-token
+other_agency_token = other-agency-token
+```
+
+Use these headers for authenticated requests:
+
+```txt
+Accept: application/json
+Authorization: Bearer {{agency_token}}
+```
 
 ### List Itineraries
 
@@ -236,6 +305,21 @@ The feature tests cover:
 - updating itinerary status;
 - validating invalid statuses;
 - requiring an agency token.
+
+## Troubleshooting
+
+- If SQLite reports that it cannot open the database file, make sure `database/database.sqlite` exists.
+- If port `8000` is already in use, start the server on another port:
+
+```bash
+php artisan serve --port=8001
+```
+
+- If migrations are already marked as run but you want a clean demo database, run:
+
+```bash
+php artisan migrate:fresh --seed
+```
 
 ## What I Would Add With More Time
 
