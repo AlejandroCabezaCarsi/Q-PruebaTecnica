@@ -15,7 +15,7 @@ This project was built with Laravel 13.
 From a fresh clone:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/AlejandroCabezaCarsi/Q-PruebaTecnica
 cd Q-PruebaTecnica
 composer install
 cp .env.example .env
@@ -28,7 +28,7 @@ php artisan serve
 Windows PowerShell equivalent:
 
 ```powershell
-git clone <repository-url>
+git clone https://github.com/AlejandroCabezaCarsi/Q-PruebaTecnica
 Set-Location Q-PruebaTecnica
 composer install
 Copy-Item .env.example .env
